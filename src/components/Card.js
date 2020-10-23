@@ -41,24 +41,9 @@ const Card = ({ handleClick }) => {
                         <div className="ui image image-size">
                             <img
                                 src={url}
-                                alt="Avatar"
+                                alt="Cargando..."
                                 onLoad={handleLoadingImage}
                             />
-                            {/* {
-                                (loadingImage)
-                                    ?
-                                    (
-                                        <i className="fas fa-circle-notch fa-spin fa-10x"></i>
-                                    )
-                                    :
-                                    (
-                                        <img 
-                                            src={url} 
-                                            alt="Avatar"
-                                            onLoad={ handleLoadingImage }
-                                        />
-                                    )
-                            } */}
                         </div>
                     </div>
                 </div>
