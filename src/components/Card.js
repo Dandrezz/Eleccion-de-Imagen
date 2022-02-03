@@ -1,37 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { setFinishChoosen, setStartChoosen } from '../actions/choice';
+import React from 'react'
 
-const Card = ({ handleClick }) => {
-
-    const dispatch = useDispatch();
-    const [loadingImage, setLoadingImage] = useState(true);
-    const [url, setUrl] = useState("");
-    const { isChoosen } = useSelector(state => state.choice);
-
-
-    const loadImagen = async () => {
-        const imagen = await fetch("https://picsum.photos/450/400");
-        setUrl(imagen.url);
-        setLoadingImage(false);
-    }
-
-    useEffect(() => {
-        loadImagen();
-        dispatch(setFinishChoosen());
-    }, [isChoosen, dispatch]);
-
-
-
-    const handleChangeImage = () => {
-        setLoadingImage(true);
-        dispatch(setStartChoosen());
-        handleClick(url);
-    }
-
-    const handleLoadingImage = () => {
-
-    }
+const Card = ({ image, handleChangeImage }) => {
 
     return (
         <>
@@ -40,17 +9,15 @@ const Card = ({ handleClick }) => {
                     <div className="card imagen center">
                         <div className="ui image image-size">
                             <img
-                                src={url}
+                                src={image}
                                 alt="Cargando..."
-                                onLoad={handleLoadingImage}
                             />
                         </div>
                     </div>
                 </div>
                 <button
-                    disabled={loadingImage}
                     className="ui primary fluid button"
-                    onClick={handleChangeImage}
+                    onClick={()=>handleChangeImage(image)}
                 >Seleccionar</button>
             </div>
         </>

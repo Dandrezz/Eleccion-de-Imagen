@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Card';
 
 const ChooseApp = () => {
 
+    const [imagenUno, setImagenUno] = useState("")
+    const [imagenDos, setImagenDos] = useState("")
+
     const handleClick = (url) => {
+        fetch('https://picsum.photos/450/400').then(resp=>setImagenUno(resp.url))
+        fetch('https://picsum.photos/450/400').then(resp=>setImagenDos(resp.url))
         console.log(url.match(/[0-9]+/)[0]);
     }
+
+    useEffect(() => {
+        fetch('https://picsum.photos/450/400').then(resp=>setImagenUno(resp.url))
+        fetch('https://picsum.photos/450/400').then(resp=>setImagenDos(resp.url))
+    }, [])
 
     return (
         <div className="all">
@@ -18,8 +28,8 @@ const ChooseApp = () => {
                     <div className="div-hiddin" />
                 </div>
                 <div className="ui middle aligned two column centered grid centered custom-animation">
-                    <Card url="https://picsum.photos/450/400" handleClick={handleClick} />
-                    <Card url="https://picsum.photos/450/400" handleClick={handleClick} />
+                    <Card image={imagenUno} handleChangeImage={handleClick} />
+                    <Card image={imagenDos} handleChangeImage={handleClick} />
                 </div>
             </div>
         </div>
